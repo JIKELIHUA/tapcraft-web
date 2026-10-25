@@ -1,5 +1,5 @@
 // TapCraft Global B2B Configuration
-// Updated with verified inquiry routing channels
+// Updated with verified professional contact channels
 
 export const APP_CONFIG = {
   // Official B2B inquiry receiving email (Customer inquiries will go here)
@@ -11,8 +11,11 @@ export const APP_CONFIG = {
   // Official WhatsApp number for European / US sales inquiries (Country code + Phone)
   whatsappNumber: '8619019406264',
 
-  // Official WeChat ID / Bound Phone for domestic corporate procurement
-  wechatId: '19019406264',
+  // Official WeChat ID for domestic corporate procurement
+  wechatId: 'yangonglailaylay',
+
+  // Contact Persona Name
+  contactPerson: 'Alex (TapCraft 商务采购)',
 
   // Direct Phone line
   phoneNumber: '+86 190 1940 6264',

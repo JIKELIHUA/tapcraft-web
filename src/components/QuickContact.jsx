@@ -98,7 +98,7 @@ export default function QuickContact() {
                     {copiedWechat ? (
                       <span className="text-amber-300 font-bold">{q.copied}</span>
                     ) : (
-                      <span>{lang === 'zh' ? `复制微信/手机: ${contactData.wechatId}` : `WeChat: ${contactData.wechatId}`}</span>
+                      <span>{lang === 'zh' ? `微信号: ${contactData.wechatId} (点击复制)` : `WeChat: ${contactData.wechatId}`}</span>
                     )}
                   </div>
                 </div>
