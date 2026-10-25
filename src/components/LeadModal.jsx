@@ -11,7 +11,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
     company: '',
     name: '',
     email: '',
-    whatsapp: '',
+    phone: '',
     quantity: '100',
     finish: 'Obsidian Black',
     notes: '',
@@ -204,11 +204,11 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
                     {t.modal.phoneLabel}
                   </label>
                   <input
-                    type="tel"
-                    value={formData.whatsapp}
-                    onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                    type="text"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-[#080A0D] border border-white/15 focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none transition-colors"
-                    placeholder="+1 (555) 019-2834"
+                    placeholder={t.modal.phonePlaceholder || '+1 (555) 019-2834 / WeChat ID'}
                   />
                 </div>
               </div>
