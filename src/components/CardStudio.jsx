@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, RefreshCw, QrCode, Wifi, ArrowRight, Check, SlidersHorizontal, Download } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -33,6 +33,35 @@ export default function CardStudio({ onOpenQuoteModal }) {
   const [cardholderTitle, setCardholderTitle] = useState('MANAGING PARTNER');
   const [destinationUrl, setDestinationUrl] = useState('https://linkedin.com/in/sarah-jennings');
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isVipProof, setIsVipProof] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const comp = params.get('company');
+    const name = params.get('name');
+    const role = params.get('role');
+    const finish = params.get('finish');
+    const url = params.get('url');
+
+    if (comp) {
+      setCompanyName(comp);
+      setIsVipProof(true);
+    }
+    if (name) {
+      setCardholderName(name);
+      setIsVipProof(true);
+    }
+    if (role) setCardholderTitle(role);
+    if (finish && FINISH_STYLES[finish]) setSelectedFinishId(finish);
+    if (url) setDestinationUrl(url);
+
+    if (comp || name) {
+      setTimeout(() => {
+        const el = document.getElementById('studio');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 400);
+    }
+  }, []);
 
   const activeFinish = t.studio.finishes.find((f) => f.id === selectedFinishId) || t.studio.finishes[0];
   const activeStyle = FINISH_STYLES[selectedFinishId] || FINISH_STYLES.obsidian;
@@ -227,10 +256,22 @@ export default function CardStudio({ onOpenQuoteModal }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-xs font-semibold text-amber-300 font-mono uppercase tracking-wider">
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            {t.studio.badge}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          {isVipProof && (
+            <div className="mb-4 p-3 rounded-2xl bg-gradient-to-r from-emerald-500/15 via-amber-400/15 to-emerald-500/15 border border-amber-400/40 inline-flex items-center gap-2.5 px-5 py-2 shadow-lg">
+              <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+              <span className="text-xs sm:text-sm font-bold text-white">
+                {lang === 'zh'
+                  ? `专属 3D 定制样机已生成：${companyName} (${cardholderName})`
+                  : `Exclusive Custom 3D Proof Prepared for ${companyName} (${cardholderName})`}
+              </span>
+            </div>
+          )}
+          <div className=" block">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-xs font-semibold text-amber-300 font-mono uppercase tracking-wider">
+              <SlidersHorizontal className="w-3.5 h-3.5" />
+              {t.studio.badge}
+            </div>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white font-['Space_Grotesk'] tracking-tight">
             {t.studio.title}

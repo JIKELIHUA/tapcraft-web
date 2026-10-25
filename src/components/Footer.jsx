@@ -2,7 +2,7 @@ import React from 'react';
 import { Mail, MapPin, Globe, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
+export default function Footer({ onOpenQuoteModal, onOpenSampleModal, onOpenOps }) {
   const { t } = useLanguage();
 
   return (
@@ -109,8 +109,15 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
               ))}
             </div>
 
-            <div className="text-slate-400">
-              {t.footer.copyright.replace('{year}', String(new Date().getFullYear()))}
+            <div className="flex items-center gap-4 text-slate-400">
+              <span>{t.footer.copyright.replace('{year}', String(new Date().getFullYear()))}</span>
+              <button
+                onClick={onOpenOps}
+                className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-amber-400/20 text-slate-500 hover:text-amber-300 border border-white/5 hover:border-amber-400/30 text-[10px] font-mono transition-colors cursor-pointer"
+                title="Seller Operations & 1688 Bridge Workbench"
+              >
+                🛠️ 操盘工作台 (Ops)
+              </button>
             </div>
           </div>
         </div>

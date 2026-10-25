@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './i18n/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,10 +14,24 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import LeadModal from './components/LeadModal';
 import QuickContact from './components/QuickContact';
+import OpsWorkbench from './components/OpsWorkbench';
 
 function MainApp() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitialData, setModalInitialData] = useState({});
+  const [opsOpen, setOpsOpen] = useState(false);
+
+  useEffect(() => {
+    const checkOps = () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('ops') === '1' || window.location.hash === '#ops') {
+        setOpsOpen(true);
+      }
+    };
+    checkOps();
+    window.addEventListener('hashchange', checkOps);
+    return () => window.removeEventListener('hashchange', checkOps);
+  }, []);
 
   const handleOpenQuoteModal = (data = {}) => {
     setModalInitialData({ ...data, mode: 'quote' });
@@ -99,6 +113,7 @@ function MainApp() {
       <Footer
         onOpenQuoteModal={handleOpenQuoteModal}
         onOpenSampleModal={handleOpenSampleModal}
+        onOpenOps={() => setOpsOpen(true)}
       />
 
       {/* Unified Lead & Sample Modal */}
@@ -106,6 +121,12 @@ function MainApp() {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         initialData={modalInitialData}
+      />
+
+      {/* Seller Bilateral Operations Workbench */}
+      <OpsWorkbench
+        isOpen={opsOpen}
+        onClose={() => setOpsOpen(false)}
       />
 
       {/* Floating Quick B2B Concierge Widget */}
