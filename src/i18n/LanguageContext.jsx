@@ -6,9 +6,21 @@ const LanguageContext = createContext();
 export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(() => {
     try {
+      // 1. First check URL query parameter ?lang=en or ?lang=zh
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const urlLang = params.get('lang');
+        if (urlLang === 'zh' || urlLang === 'en') {
+          localStorage.setItem('tapcraft_lang', urlLang);
+          return urlLang;
+        }
+      }
+
+      // 2. Next check saved localStorage
       const saved = localStorage.getItem('tapcraft_lang');
       if (saved === 'zh' || saved === 'en') return saved;
-      // Detect browser language if first time
+
+      // 3. Fallback to browser language
       if (typeof navigator !== 'undefined' && navigator.language && navigator.language.startsWith('zh')) {
         return 'zh';
       }
@@ -21,6 +33,11 @@ export function LanguageProvider({ children }) {
     try {
       localStorage.setItem('tapcraft_lang', newLang);
       document.documentElement.lang = newLang;
+      if (typeof window !== 'undefined') {
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', newLang);
+        window.history.replaceState({}, '', url.toString());
+      }
     } catch (e) {}
   };
 
