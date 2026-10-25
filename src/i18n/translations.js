@@ -71,6 +71,8 @@ export const translations = {
       backSn: 'SN: TC-8849-SZ',
       backNoSub: '100% ZERO SUBSCRIPTION FEE',
       ctaSave: 'Save Design & Request Wholesale Quote',
+      ctaDownload: 'Download 3D Proof (PNG)',
+      downloading: 'Rendering 3D Proof...',
       turnaroundNotice: '⚡ 4-Hour Digital 3D Proof turnaround · Free artwork vector conversion',
       finishes: [
         {
@@ -406,6 +408,20 @@ export const translations = {
       copyright: '© {year} TapCraft Hardware Co., Ltd. All rights reserved. Shenzhen, China.',
       mobileSample: 'Sample Kit ($29)',
       mobileQuote: 'Instant B2B Quote'
+    },
+    quickContact: {
+      btnLabel: 'B2B Helpdesk',
+      title: 'TapCraft Fleet Concierge',
+      subtitle: 'Factory Direct · Typical response <15m',
+      whatsappBtn: 'WhatsApp Specialist',
+      whatsappSub: 'Direct engineer chat',
+      emailBtn: 'Wholesale Inquiry Email',
+      emailSub: 'wholesale@tapcraft.co',
+      wechatBtn: 'WeChat Concierge',
+      wechatSub: 'Tap to copy ID: TapCraft-Global',
+      copied: 'WeChat ID Copied!',
+      available: 'Online Now',
+      close: 'Close'
     }
   },
 
@@ -481,6 +497,8 @@ export const translations = {
       backSn: '出厂序列号: TC-8849-SZ',
       backNoSub: '100% 硬件买断制 · 终身无订阅费',
       ctaSave: '保存当前设计并获取团队批发报价',
+      ctaDownload: '下载 3D 渲染效果图 (PNG)',
+      downloading: '正在导出 3D 效果图...',
       turnaroundNotice: '⚡ 4小时内由深圳工程师为您生成 3D 渲染样机 · 免费协助矢量 Logo 优化',
       finishes: [
         {
@@ -816,6 +834,20 @@ export const translations = {
       copyright: '© {year} 深圳 TapCraft 智能硬件科技有限责任公司. 保留所有权利.',
       mobileSample: '评测样包 ($29)',
       mobileQuote: '即时获取 B2B 报价'
+    },
+    quickContact: {
+      btnLabel: '商务直连客服',
+      title: 'TapCraft 专属商务客服',
+      subtitle: '深圳源头直连 · 15分钟内极速响应',
+      whatsappBtn: 'WhatsApp 外贸直通',
+      whatsappSub: '欧美与海外客户通道',
+      emailBtn: '官方商务邮箱',
+      emailSub: 'wholesale@tapcraft.co',
+      wechatBtn: '商务微信直连',
+      wechatSub: '点击复制微信号: TapCraft-Global',
+      copied: '微信号已复制！',
+      available: '客服在线中',
+      close: '收起'
     }
   }
 };

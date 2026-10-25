@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Sparkles, Send, ShieldCheck, Copy, Check } from 'lucide-react';
+import { X, CheckCircle2, Sparkles, Send, ShieldCheck, Copy, Check, Loader2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useLanguage } from '../i18n/LanguageContext';
+import { APP_CONFIG } from '../config';
 
 export default function LeadModal({ isOpen, onClose, initialData = {} }) {
   const { t } = useLanguage();
@@ -17,6 +18,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [ticketId, setTicketId] = useState('');
   const [copied, setCopied] = useState(false);
 
@@ -44,11 +46,47 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const randomNum = Math.floor(1000 + Math.random() * 9000);
     const id = `TC-${activeTab === 'sample' ? 'SMP' : 'FLT'}-${randomNum}`;
     setTicketId(id);
+
+    // 1. Persist lead in browser storage (zero data loss)
+    try {
+      const savedLeads = JSON.parse(localStorage.getItem('tapcraft_leads') || '[]');
+      const newLead = {
+        id,
+        timestamp: new Date().toISOString(),
+        tab: activeTab,
+        ...formData
+      };
+      savedLeads.unshift(newLead);
+      localStorage.setItem('tapcraft_leads', JSON.stringify(savedLeads));
+    } catch (err) {}
+
+    // 2. Dispatch to email / Web3Forms if key configured
+    if (APP_CONFIG.web3FormsKey) {
+      try {
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: APP_CONFIG.web3FormsKey,
+            subject: `[TapCraft B2B Inquiry] ${formData.company || 'Enterprise'} (${id})`,
+            from_name: formData.name || 'TapCraft Client',
+            ...formData,
+            ticket_id: id
+          })
+        });
+      } catch (err) {
+        console.warn('Inquiry dispatch error', err);
+      }
+    }
+
+    setLoading(false);
     setSubmitted(true);
 
     try {
@@ -61,7 +99,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
   };
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('wholesale@tapcraft.co');
+    navigator.clipboard.writeText(APP_CONFIG.contactEmail || 'wholesale@tapcraft.co');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -228,9 +266,14 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-4 text-sm font-bold text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-xl shadow-xl shadow-amber-400/25 transition-all flex items-center justify-center gap-2 cursor-pointer font-['Space_Grotesk']"
+                  disabled={loading}
+                  className="w-full py-4 text-sm font-bold text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-xl shadow-xl shadow-amber-400/25 transition-all flex items-center justify-center gap-2 cursor-pointer font-['Space_Grotesk'] disabled:opacity-60"
                 >
-                  <Send className="w-4 h-4" />
+                  {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
                   <span>
                     {activeTab === 'quote' ? t.modal.btnSubmitQuote : t.modal.btnSubmitSample}
                   </span>

@@ -11,6 +11,7 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import LeadModal from './components/LeadModal';
+import QuickContact from './components/QuickContact';
 
 function MainApp() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -96,6 +97,9 @@ function MainApp() {
         onClose={() => setModalOpen(false)}
         initialData={modalInitialData}
       />
+
+      {/* Floating Quick B2B Concierge Widget */}
+      <QuickContact />
     </div>
   );
 }

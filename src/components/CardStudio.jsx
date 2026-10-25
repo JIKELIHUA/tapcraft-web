@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, RefreshCw, QrCode, Wifi, ArrowRight, Check, SlidersHorizontal } from 'lucide-react';
+import { Sparkles, RefreshCw, QrCode, Wifi, ArrowRight, Check, SlidersHorizontal, Download } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const FINISH_STYLES = {
@@ -37,6 +37,8 @@ export default function CardStudio({ onOpenQuoteModal }) {
   const activeFinish = t.studio.finishes.find((f) => f.id === selectedFinishId) || t.studio.finishes[0];
   const activeStyle = FINISH_STYLES[selectedFinishId] || FINISH_STYLES.obsidian;
 
+  const [downloading, setDownloading] = useState(false);
+
   const handleApplyToQuote = () => {
     onOpenQuoteModal({
       finish: activeFinish.name,
@@ -44,6 +46,177 @@ export default function CardStudio({ onOpenQuoteModal }) {
       contactPerson: cardholderName,
       customUrl: destinationUrl
     });
+  };
+
+  const handleDownloadProof = () => {
+    setDownloading(true);
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1200;
+      canvas.height = 760;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Dark tech studio background
+      ctx.fillStyle = '#090B0E';
+      ctx.fillRect(0, 0, 1200, 760);
+
+      // Subtle engineering grid
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < 1200; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 760);
+        ctx.stroke();
+      }
+      for (let y = 0; y < 760; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(1200, y);
+        ctx.stroke();
+      }
+
+      // Card Dimensions & Placement (CR80 ratio: 856 x 540)
+      const cardX = 172;
+      const cardY = 80;
+      const cardW = 856;
+      const cardH = 540;
+      const radius = 28;
+
+      // Shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+      ctx.shadowBlur = 45;
+      ctx.shadowOffsetY = 24;
+
+      // Rounded Card Path
+      ctx.beginPath();
+      ctx.roundRect(cardX, cardY, cardW, cardH, radius);
+      ctx.closePath();
+
+      // Card Finish Gradient
+      const gradient = ctx.createLinearGradient(cardX, cardY, cardX + cardW, cardY + cardH);
+      if (selectedFinishId === 'gold') {
+        gradient.addColorStop(0, '#5a461b');
+        gradient.addColorStop(0.3, '#35270c');
+        gradient.addColorStop(0.7, '#6b5420');
+        gradient.addColorStop(1, '#2c2008');
+      } else if (selectedFinishId === 'titanium') {
+        gradient.addColorStop(0, '#525b68');
+        gradient.addColorStop(0.5, '#3b434e');
+        gradient.addColorStop(1, '#232930');
+      } else if (selectedFinishId === 'rose') {
+        gradient.addColorStop(0, '#5e3734');
+        gradient.addColorStop(0.5, '#3a1f1d');
+        gradient.addColorStop(1, '#231211');
+      } else {
+        gradient.addColorStop(0, '#1c1f26');
+        gradient.addColorStop(0.5, '#0f1217');
+        gradient.addColorStop(1, '#080a0d');
+      }
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // Reset shadow for crisp laser engraving text
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+
+      // Card Border Stroke
+      ctx.lineWidth = 3;
+      if (selectedFinishId === 'gold') {
+        ctx.strokeStyle = 'rgba(234, 179, 8, 0.4)';
+      } else if (selectedFinishId === 'rose') {
+        ctx.strokeStyle = 'rgba(251, 113, 133, 0.4)';
+      } else {
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      }
+      ctx.stroke();
+
+      if (activeTabFace === 'front') {
+        // Front Face
+        ctx.fillStyle = selectedFinishId === 'gold' ? '#fde047' : (selectedFinishId === 'rose' ? '#fbcfe8' : '#ffffff');
+        ctx.font = 'bold 24px "Space Grotesk", sans-serif';
+        ctx.fillText('TAP · CRAFT', cardX + 50, cardY + 70);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.font = '16px monospace';
+        ctx.fillText('NTAG216 HIGH FREQ', cardX + cardW - 240, cardY + 70);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.font = 'bold 14px monospace';
+        ctx.fillText('PRECISION FIBER LASER DEEP ETCHED', cardX + 50, cardY + 230);
+
+        ctx.fillStyle = selectedFinishId === 'gold' ? '#fef08a' : (selectedFinishId === 'rose' ? '#ffe4e6' : '#ffffff');
+        ctx.font = 'bold 44px "Space Grotesk", sans-serif';
+        const displayComp = (companyName || 'YOUR COMPANY').toUpperCase();
+        ctx.fillText(displayComp, cardX + 50, cardY + 290);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cardX + 50, cardY + 380);
+        ctx.lineTo(cardX + cardW - 50, cardY + 380);
+        ctx.stroke();
+
+        ctx.fillStyle = selectedFinishId === 'gold' ? '#fde047' : '#ffffff';
+        ctx.font = 'bold 26px "Space Grotesk", sans-serif';
+        ctx.fillText((cardholderName || 'CARDHOLDER NAME').toUpperCase(), cardX + 50, cardY + 430);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.font = '18px sans-serif';
+        ctx.fillText(cardholderTitle || 'EXECUTIVE / DIRECTOR', cardX + 50, cardY + 465);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.font = 'bold 15px monospace';
+        ctx.fillText('SOLID 304 SURGICAL STEEL · 22G', cardX + cardW - 320, cardY + 450);
+      } else {
+        // Back Face
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.font = 'bold 18px monospace';
+        ctx.fillText('TAP ANY SMARTPHONE HERE', cardX + 50, cardY + 70);
+        ctx.fillText('ISO 14443A COMPLIANT', cardX + cardW - 250, cardY + 70);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.font = 'bold 14px monospace';
+        ctx.fillText('PROGRAMMED NFC TARGET URL:', cardX + 50, cardY + 240);
+
+        ctx.fillStyle = '#fde047';
+        ctx.font = 'bold 28px monospace';
+        ctx.fillText(destinationUrl || 'https://vcard.tapcraft.tech/profile', cardX + 50, cardY + 290);
+
+        ctx.fillStyle = '#34d399';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.fillText('✓ Works natively on iOS & Android · Zero App Required', cardX + 50, cardY + 340);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cardX + 50, cardY + 410);
+        ctx.lineTo(cardX + cardW - 50, cardY + 410);
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.font = '16px monospace';
+        ctx.fillText('SN: TC-9216-SERIES-SHENZHEN', cardX + 50, cardY + 460);
+      }
+
+      // Watermark Footer
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+      ctx.font = '13px monospace';
+      ctx.fillText('TapCraft™ Hardware Fleet · 3D Pre-Production Proof · Shenzhen Direct Dispatch · wholesale@tapcraft.co', 172, 730);
+
+      // Trigger instant PNG file download
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      const cleanComp = (companyName || 'Custom').replace(/[^a-zA-Z0-9_-]/g, '_');
+      link.download = `TapCraft-Proof-${cleanComp}-${selectedFinishId}-${activeTabFace}.png`;
+      link.href = dataUrl;
+      link.click();
+    } catch (e) {
+      console.error('Download proof error', e);
+    } finally {
+      setTimeout(() => setDownloading(false), 600);
+    }
   };
 
   return (
@@ -282,16 +455,27 @@ export default function CardStudio({ onOpenQuoteModal }) {
               </div>
             </div>
 
-            {/* CTA: Apply to Quote */}
-            <div className="pt-2">
-              <button
-                onClick={handleApplyToQuote}
-                className="w-full py-4 text-sm font-bold text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-xl shadow-xl shadow-amber-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer font-['Space_Grotesk']"
-              >
-                <span>{t.studio.ctaSave}</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-              <p className="text-[11px] text-slate-400 text-center mt-2.5">
+            {/* CTA: Apply to Quote & Download Proof */}
+            <div className="pt-2 space-y-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <button
+                  onClick={handleApplyToQuote}
+                  className="w-full py-3.5 px-4 text-xs sm:text-sm font-bold text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-xl shadow-xl shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer font-['Space_Grotesk']"
+                >
+                  <span className="truncate">{t.studio.ctaSave}</span>
+                  <ArrowRight className="w-4 h-4 shrink-0" />
+                </button>
+
+                <button
+                  onClick={handleDownloadProof}
+                  disabled={downloading}
+                  className="w-full py-3.5 px-4 text-xs font-bold text-slate-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/15 hover:border-amber-400/40 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer font-['Space_Grotesk']"
+                >
+                  <Download className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="truncate">{downloading ? t.studio.downloading : t.studio.ctaDownload}</span>
+                </button>
+              </div>
+              <p className="text-[11px] text-slate-400 text-center">
                 {t.studio.turnaroundNotice}
               </p>
             </div>
