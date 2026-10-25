@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Sparkles, Send, ShieldCheck, ArrowRight, PhoneCall, Copy, Check } from 'lucide-react';
+import { X, CheckCircle2, Sparkles, Send, ShieldCheck, Copy, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function LeadModal({ isOpen, onClose, initialData = {} }) {
-  const [activeTab, setActiveTab] = useState('quote'); // 'quote' or 'sample'
+  const { t } = useLanguage();
+  const [activeTab, setActiveTab] = useState('quote');
   const [formData, setFormData] = useState({
     company: '',
     name: '',
@@ -49,16 +51,13 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
     setTicketId(id);
     setSubmitted(true);
 
-    // Fire confetti
     try {
       confetti({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 }
       });
-    } catch (err) {
-      // safe fallback
-    }
+    } catch (err) {}
   };
 
   const handleCopyEmail = () => {
@@ -87,37 +86,33 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
               <button
                 type="button"
                 onClick={() => setActiveTab('quote')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer font-['Space_Grotesk'] ${
                   activeTab === 'quote'
                     ? 'bg-amber-400 text-black shadow-md shadow-amber-400/20'
                     : 'text-slate-400 hover:text-white bg-white/5'
                 }`}
               >
-                Fleet Quote & 3D Proof
+                {t.modal.tabQuote}
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('sample')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer font-['Space_Grotesk'] ${
                   activeTab === 'sample'
                     ? 'bg-amber-400 text-black shadow-md shadow-amber-400/20'
                     : 'text-slate-400 hover:text-white bg-white/5'
                 }`}
               >
-                Sample Kit ($29 Priority Air)
+                {t.modal.tabSample}
               </button>
             </div>
 
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-white font-['Space_Grotesk'] mb-1">
-                {activeTab === 'quote'
-                  ? 'Request Free 3D Proof & Wholesale Tier'
-                  : 'Order B2B Fleet Evaluation Sample Kit'}
+                {activeTab === 'quote' ? t.modal.titleQuote : t.modal.titleSample}
               </h3>
               <p className="text-xs text-slate-400">
-                {activeTab === 'quote'
-                  ? 'Our hardware design team will render your logo in 3D within 4 hours. No obligation.'
-                  : 'Receive 3 metal cards (Black, Gold, Silver) + 1 Review Stand dispatched via priority air.'}
+                {activeTab === 'quote' ? t.modal.descQuote : t.modal.descSample}
               </p>
             </div>
 
@@ -126,7 +121,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-medium text-slate-300 block mb-1">
-                    Company / Organization <span className="text-amber-400">*</span>
+                    {t.modal.companyLabel} <span className="text-amber-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -139,7 +134,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
                 </div>
                 <div>
                   <label className="text-xs font-medium text-slate-300 block mb-1">
-                    Your Name <span className="text-amber-400">*</span>
+                    {t.modal.nameLabel} <span className="text-amber-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -155,7 +150,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-medium text-slate-300 block mb-1">
-                    Corporate Email <span className="text-amber-400">*</span>
+                    {t.modal.emailLabel} <span className="text-amber-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -168,7 +163,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
                 </div>
                 <div>
                   <label className="text-xs font-medium text-slate-300 block mb-1">
-                    WhatsApp or Mobile (Optional)
+                    {t.modal.phoneLabel}
                   </label>
                   <input
                     type="tel"
@@ -184,7 +179,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-xs font-medium text-slate-300 block mb-1">
-                      Estimated Fleet Size (MOQ 20)
+                      {t.modal.fleetSizeLabel}
                     </label>
                     <select
                       value={formData.quantity}
@@ -193,23 +188,23 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
                     >
                       <option value="30">30 Cards ($18.00/ea)</option>
                       <option value="50">50 Cards ($15.50/ea)</option>
-                      <option value="100">100 Cards ($13.50/ea) — Most Popular</option>
+                      <option value="100">100 Cards ($13.50/ea)</option>
                       <option value="250">250 Cards ($11.00/ea)</option>
                       <option value="500">500+ Cards ($9.50/ea)</option>
                     </select>
                   </div>
                   <div>
                     <label className="text-xs font-medium text-slate-300 block mb-1">
-                      Primary Finish
+                      {t.modal.finishLabel}
                     </label>
                     <select
                       value={formData.finish}
                       onChange={(e) => setFormData({ ...formData, finish: e.target.value })}
                       className="w-full bg-[#080A0D] border border-white/15 focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none transition-colors"
                     >
-                      <option value="Obsidian Black">Obsidian Matte Black (Steel)</option>
+                      <option value="Obsidian Black">Obsidian Matte Black</option>
                       <option value="Royale Gold">Royale 24K Brushed Gold</option>
-                      <option value="Cyber Titanium">Cyber Titanium Brushed Steel</option>
+                      <option value="Cyber Titanium">Cyber Titanium Steel</option>
                       <option value="Review Stand">Tap-to-Review Acrylic Stand</option>
                       <option value="Mixed Fleet">Mixed Fleet Combination</option>
                     </select>
@@ -219,14 +214,14 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
 
               <div>
                 <label className="text-xs font-medium text-slate-300 block mb-1">
-                  Logo / Vector Artwork Notes
+                  {t.modal.notesLabel}
                 </label>
                 <textarea
                   rows={2}
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   className="w-full bg-[#080A0D] border border-white/15 focus:border-amber-400 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none transition-colors"
-                  placeholder="You can reply to our confirmation email with your AI/SVG/PDF logo file, or include notes here."
+                  placeholder={t.modal.notesPlaceholder}
                 />
               </div>
 
@@ -237,9 +232,7 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
                 >
                   <Send className="w-4 h-4" />
                   <span>
-                    {activeTab === 'quote'
-                      ? 'Submit & Generate 4-Hour 3D Proof'
-                      : 'Authorize $29 Evaluation Sample Kit'}
+                    {activeTab === 'quote' ? t.modal.btnSubmitQuote : t.modal.btnSubmitSample}
                   </span>
                 </button>
               </div>
@@ -247,12 +240,12 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
               <div className="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2 font-mono">
                 <div className="flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Zero Spam Guarantee</span>
+                  <span>{t.modal.guaranteeNoSpam}</span>
                 </div>
                 <span>&middot;</span>
                 <div className="flex items-center gap-1">
                   <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Direct Factory Engineer Assigned</span>
+                  <span>{t.modal.guaranteeEngineer}</span>
                 </div>
               </div>
             </form>
@@ -266,28 +259,30 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
 
             <div>
               <span className="text-xs font-mono text-amber-400 font-bold bg-amber-400/10 px-2.5 py-1 rounded-md border border-amber-400/20">
-                Ticket Reference: {ticketId}
+                {t.modal.ticketPrefix}{ticketId}
               </span>
               <h3 className="text-2xl font-black text-white font-['Space_Grotesk'] mt-3 mb-2">
-                Inquiry Received by Shenzhen Engineering Team!
+                {t.modal.successTitle}
               </h3>
               <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                Thank you, <strong className="text-white">{formData.name}</strong> from <strong className="text-white">{formData.company}</strong>. Our hardware team is preparing your custom 3D digital photorealistic proof and official wholesale invoice.
+                {t.modal.successMsg
+                  .replace('{name}', formData.name)
+                  .replace('{company}', formData.company)}
               </p>
             </div>
 
             <div className="bg-[#080A0D] p-5 rounded-2xl border border-white/10 text-left max-w-md mx-auto space-y-2 text-xs text-slate-300">
               <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400">Request Type:</span>
+                <span className="text-slate-400">{t.modal.reqTypeLabel}</span>
                 <span className="font-bold text-white uppercase">{activeTab === 'quote' ? 'Wholesale Fleet Proof' : 'Sample Kit'}</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400">Contact Email:</span>
+                <span className="text-slate-400">{t.modal.contactEmailLabel}</span>
                 <span className="font-mono text-amber-300">{formData.email}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">Turnaround Expectation:</span>
-                <span className="text-emerald-400 font-semibold">Under 4 Hours</span>
+                <span className="text-slate-400">{t.modal.turnaroundLabel}</span>
+                <span className="text-emerald-400 font-semibold">{t.modal.turnaroundVal}</span>
               </div>
             </div>
 
@@ -296,14 +291,14 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
                 onClick={onClose}
                 className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-bold text-white transition-colors cursor-pointer"
               >
-                Back to Site
+                {t.modal.btnBack}
               </button>
               <button
                 onClick={handleCopyEmail}
                 className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-xs font-bold text-black transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                <span>{copied ? 'Email Copied!' : 'Copy Direct Wholesale Email'}</span>
+                <span>{copied ? t.modal.emailCopied : t.modal.btnCopyEmail}</span>
               </button>
             </div>
           </div>

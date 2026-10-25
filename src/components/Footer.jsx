@@ -1,7 +1,10 @@
 import React from 'react';
-import { Shield, Mail, Phone, MapPin, Globe, Sparkles, ArrowRight, MessageSquare } from 'lucide-react';
+import { Mail, MapPin, Globe, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
+  const { t } = useLanguage();
+
   return (
     <>
       <footer className="bg-[#07090C] border-t border-white/10 text-slate-400 text-xs">
@@ -22,13 +25,13 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
               </a>
 
               <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-                Precision-engineered NFC metal business cards and smart Google Review stands. Zero recurring app fees. Precision manufactured in Shenzhen, delivered to corporate fleets worldwide in days.
+                {t.footer.desc}
               </p>
 
               <div className="space-y-2 pt-2 text-xs">
                 <div className="flex items-center gap-2 text-slate-300">
                   <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
-                  <span>Shenzhen High-Tech Industrial Park, Nanshan District, Shenzhen, China</span>
+                  <span>{t.footer.address}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
                   <Mail className="w-4 h-4 text-amber-400 shrink-0" />
@@ -38,7 +41,7 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
                   <Globe className="w-4 h-4 text-amber-400 shrink-0" />
-                  <span>Worldwide DDP Express Air Dispatch (FedEx & DHL)</span>
+                  <span>{t.footer.shippingNotice}</span>
                 </div>
               </div>
             </div>
@@ -46,13 +49,13 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
             {/* Col 3: Hardware Lineup */}
             <div className="space-y-3">
               <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
-                Hardware Fleet
+                {t.footer.colHardware}
               </h4>
               <ul className="space-y-2 text-xs">
                 <li><a href="#studio" className="hover:text-amber-300 transition-colors">Obsidian™ Matte Black (Steel)</a></li>
                 <li><a href="#studio" className="hover:text-amber-300 transition-colors">Royale™ 24K Brushed Gold</a></li>
                 <li><a href="#studio" className="hover:text-amber-300 transition-colors">Cyber Titanium™ Brushed Steel</a></li>
-                <li><a href="#hardware" className="hover:text-amber-300 transition-colors">Tap-to-Review™ Acrylic Stands</a></li>
+                <li><a href="#hardware" className="hover:text-amber-300 transition-colors">Tap-to-Review™ Stands</a></li>
                 <li><a href="#hardware" className="hover:text-amber-300 transition-colors">TapCraft Eco™ Bamboo Cards</a></li>
               </ul>
             </div>
@@ -60,7 +63,7 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
             {/* Col 4: Corporate Solutions */}
             <div className="space-y-3">
               <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
-                Fleet Solutions
+                {t.footer.colSolutions}
               </h4>
               <ul className="space-y-2 text-xs">
                 <li><a href="#pricing" className="hover:text-amber-300 transition-colors">Real Estate Brokerage Fleets</a></li>
@@ -74,22 +77,22 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
             {/* Col 5: Direct Inquiries */}
             <div className="space-y-3">
               <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
-                Procurement
+                {t.footer.colProcurement}
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Evaluating physical samples for your executive team?
+                {t.footer.samplePrompt}
               </p>
               <button
                 onClick={onOpenSampleModal}
                 className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-xs text-center block transition-colors cursor-pointer"
               >
-                Order Evaluation Kit ($29)
+                {t.footer.btnSample}
               </button>
               <button
                 onClick={() => onOpenQuoteModal({})}
-                className="w-full py-2.5 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs text-center block transition-colors cursor-pointer shadow-md shadow-amber-400/20"
+                className="w-full py-2.5 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs text-center block transition-colors cursor-pointer shadow-md shadow-amber-400/20 font-['Space_Grotesk']"
               >
-                Request Fleet Quote
+                {t.footer.btnQuote}
               </button>
             </div>
 
@@ -98,35 +101,34 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
           {/* Compliance & Standards Bar */}
           <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-[11px] text-slate-400">
             <div className="flex flex-wrap items-center gap-4 font-mono">
-              <span>ISO 14443A NFC Compliant</span>
-              <span>&middot;</span>
-              <span>FCC & CE Certified</span>
-              <span>&middot;</span>
-              <span>Surgical Grade 304 Stainless Steel</span>
-              <span>&middot;</span>
-              <span>100% Recyclable</span>
+              {t.footer.standards.map((std, idx) => (
+                <React.Fragment key={idx}>
+                  {idx > 0 && <span>&middot;</span>}
+                  <span>{std}</span>
+                </React.Fragment>
+              ))}
             </div>
 
             <div className="text-slate-400">
-              &copy; {new Date().getFullYear()} TapCraft Hardware Co., Ltd. All rights reserved. Shenzhen, China.
+              {t.footer.copyright.replace('{year}', String(new Date().getFullYear()))}
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Sticky Bottom Mobile Quick Action Bar (Visible only on small screens) */}
+      {/* Sticky Bottom Mobile Quick Action Bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0E1218]/95 backdrop-blur-xl border-t border-white/15 p-3 flex items-center justify-between gap-3 shadow-2xl">
         <button
           onClick={onOpenSampleModal}
           className="flex-1 py-3 text-xs font-semibold text-slate-200 bg-white/5 border border-white/15 rounded-xl text-center cursor-pointer"
         >
-          Sample Kit ($29)
+          {t.footer.mobileSample}
         </button>
         <button
           onClick={() => onOpenQuoteModal({})}
-          className="flex-1 py-3 text-xs font-bold text-black bg-gradient-to-r from-amber-300 to-amber-500 rounded-xl shadow-lg shadow-amber-400/20 text-center cursor-pointer flex items-center justify-center gap-1.5"
+          className="flex-1 py-3 text-xs font-bold text-black bg-gradient-to-r from-amber-300 to-amber-500 rounded-xl shadow-lg shadow-amber-400/20 text-center cursor-pointer flex items-center justify-center gap-1.5 font-['Space_Grotesk']"
         >
-          <span>Instant B2B Quote</span>
+          <span>{t.footer.mobileQuote}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>

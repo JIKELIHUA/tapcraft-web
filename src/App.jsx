@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LanguageProvider } from './i18n/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CardStudio from './components/CardStudio';
@@ -11,7 +12,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import LeadModal from './components/LeadModal';
 
-export default function App() {
+function MainApp() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitialData, setModalInitialData] = useState({});
 
@@ -96,5 +97,13 @@ export default function App() {
         initialData={modalInitialData}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainApp />
+    </LanguageProvider>
   );
 }
