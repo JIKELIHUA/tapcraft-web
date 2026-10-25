@@ -31,7 +31,7 @@ export default function QuickContact() {
   const q = t.quickContact;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+    <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 flex flex-col items-end">
       {/* Popover Card */}
       {isOpen && (
         <div className="mb-3 w-80 sm:w-88 bg-[#0E1218] border border-amber-400/30 rounded-2xl p-5 shadow-2xl shadow-black/80 backdrop-blur-xl animate-fadeIn text-left">

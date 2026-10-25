@@ -52,41 +52,18 @@ export default function HowItWorks({ onOpenQuoteModal }) {
                     {s.title}
                   </h3>
 
-                  <p className="text-sm text-slate-300 leading-relaxed mb-4 font-normal">
+                  <p className="text-sm text-slate-300 leading-relaxed font-normal">
                     {s.desc}
                   </p>
-
-                  <div className="p-3.5 rounded-xl bg-[#090B0E] border border-white/5 text-xs text-slate-400 leading-normal">
-                    {s.detail}
-                  </div>
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-emerald-400">
-                  <CheckCircle className="w-3.5 h-3.5" />
-                  <span>{t.howItWorks.guarantee}</span>
+                  <CheckCircle className="w-3.5 h-3.5 shrink-0" />
+                  <span>{s.guarantee || t.howItWorks.guarantee}</span>
                 </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom CTA Banner */}
-        <div className="rounded-2xl bg-gradient-to-r from-amber-500/15 via-amber-400/20 to-amber-500/15 border border-amber-400/30 p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-1 text-center sm:text-left">
-            <h4 className="text-lg font-bold text-white font-['Space_Grotesk']">
-              {t.howItWorks.bottomPrompt}
-            </h4>
-            <p className="text-xs text-amber-200/80">
-              {t.howItWorks.bottomDesc}
-            </p>
-          </div>
-          <button
-            onClick={() => onOpenQuoteModal({})}
-            className="px-6 py-3 text-xs font-bold text-black bg-amber-400 hover:bg-amber-300 rounded-xl shadow-lg shadow-amber-400/20 transition-all shrink-0 flex items-center gap-2 cursor-pointer font-['Space_Grotesk']"
-          >
-            <span>{t.howItWorks.btnProof}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
         </div>
 
       </div>

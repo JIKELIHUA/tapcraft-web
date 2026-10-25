@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, X, AlertTriangle } from 'lucide-react';
+import { Check, X, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function CostComparison({ onOpenQuoteModal }) {
@@ -11,8 +11,8 @@ export default function CostComparison({ onOpenQuoteModal }) {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-xs font-semibold text-red-300 font-mono uppercase tracking-wider">
-            <AlertTriangle className="w-3.5 h-3.5 text-red-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-xs font-semibold text-amber-300 font-mono uppercase tracking-wider">
+            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
             {t.comparison.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white font-['Space_Grotesk'] tracking-tight">

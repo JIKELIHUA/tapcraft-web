@@ -8,25 +8,8 @@ export default function Navbar({ onOpenQuoteModal, onOpenSampleModal }) {
 
   return (
     <>
-      {/* Top Urgent Announcement Banner */}
-      <div className="bg-gradient-to-r from-amber-500/20 via-amber-400/30 to-amber-500/20 border-b border-amber-500/30 py-2 px-3 text-[11px] sm:text-xs font-medium text-amber-200 text-center tracking-wide w-full overflow-hidden">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-          <div className="flex items-center gap-1.5 shrink-0">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse shrink-0" />
-            <strong className="text-amber-300 font-bold">{t.banner.tag}</strong>
-          </div>
-          <span>{t.banner.text}</span>
-          <button 
-            onClick={() => onOpenQuoteModal({ finish: 'Obsidian Black', quantity: 30 })}
-            className="underline hover:text-white transition-colors cursor-pointer font-semibold ml-1 shrink-0 text-amber-300"
-          >
-            {t.banner.action}
-          </button>
-        </div>
-      </div>
-
       {/* Main Navbar */}
-      <nav className="sticky top-0 z-40 backdrop-blur-xl bg-[#090B0E]/90 border-b border-white/10 transition-all w-full">
+      <nav className="sticky top-0 z-40 backdrop-blur-xl bg-[#090B0E]/95 border-b border-white/10 transition-all w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           
           {/* Brand Logo */}

@@ -155,17 +155,7 @@ export default function Hero({ onOpenQuoteModal, onScrollToStudio }) {
                   <span className="text-emerald-400 font-mono font-semibold">{t.hero.previewSpeed}</span>
                 </div>
 
-                {/* Fleet Quick Spec */}
-                <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-400">
-                  <div className="bg-white/[0.02] p-2.5 rounded-lg border border-white/5">
-                    <span className="text-white block font-medium">{t.hero.previewSpec1Title}</span>
-                    {t.hero.previewSpec1Desc}
-                  </div>
-                  <div className="bg-white/[0.02] p-2.5 rounded-lg border border-white/5">
-                    <span className="text-white block font-medium">{t.hero.previewSpec2Title}</span>
-                    {t.hero.previewSpec2Desc}
-                  </div>
-                </div>
+
 
               </div>
             </div>

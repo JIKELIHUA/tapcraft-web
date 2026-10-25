@@ -19,34 +19,17 @@ export default function ProductCatalog({ onOpenQuoteModal, onOpenSampleModal }) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="space-y-4 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-slate-300 font-mono">
-              <Shield className="w-3.5 h-3.5 text-amber-400" />
-              {t.catalog.badge}
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white font-['Space_Grotesk'] tracking-tight">
-              {t.catalog.title}
-            </h2>
-            <p className="text-slate-300 text-base sm:text-lg">
-              {t.catalog.subtitle}
-            </p>
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-slate-300 font-mono">
+            <Shield className="w-3.5 h-3.5 text-amber-400" />
+            {t.catalog.badge}
           </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => onOpenSampleModal()}
-              className="px-5 py-3 text-xs font-bold text-slate-200 border border-white/15 hover:border-amber-400 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] transition-all cursor-pointer"
-            >
-              {t.catalog.btnSample}
-            </button>
-            <button
-              onClick={() => onOpenQuoteModal({})}
-              className="px-5 py-3 text-xs font-bold text-black bg-amber-400 hover:bg-amber-300 rounded-xl shadow-lg shadow-amber-400/20 transition-all cursor-pointer"
-            >
-              {t.catalog.btnQuote}
-            </button>
-          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white font-['Space_Grotesk'] tracking-tight">
+            {t.catalog.title}
+          </h2>
+          <p className="text-slate-300 text-base sm:text-lg">
+            {t.catalog.subtitle}
+          </p>
         </div>
 
         {/* Product Cards Grid */}
@@ -107,11 +90,6 @@ export default function ProductCatalog({ onOpenQuoteModal, onOpenSampleModal }) 
                 </div>
 
                 <div className="pt-4 border-t border-white/10">
-                  <div className="text-[11px] text-slate-400 mb-3 truncate">
-                    <span className="text-slate-400">{t.catalog.idealForLabel}</span>
-                    <span className="text-slate-200">{prod.idealFor}</span>
-                  </div>
-
                   <button
                     onClick={() => prod.id === 'sample-fleet-kit' ? onOpenSampleModal() : onOpenQuoteModal({ finish: prod.title })}
                     className="w-full py-3 text-xs font-bold text-slate-200 group-hover:text-black bg-white/5 group-hover:bg-amber-400 border border-white/10 group-hover:border-amber-400 rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer font-['Space_Grotesk']"
