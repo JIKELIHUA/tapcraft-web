@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MessageSquare, X, Check, Copy, ExternalLink, Mail, Phone, Sparkles } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { APP_CONFIG } from '../config';
 
 export default function QuickContact() {
   const { t, lang } = useLanguage();
@@ -9,9 +10,10 @@ export default function QuickContact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const contactData = {
-    whatsappUrl: 'https://wa.me/8613800000000?text=Hi%20TapCraft%2C%20I%20would%20like%20to%20request%20a%20B2B%20quote%20for%20custom%20NFC%20metal%20cards.',
-    email: 'wholesale@tapcraft.co',
-    wechatId: 'TapCraft-Global',
+    whatsappUrl: `https://wa.me/${APP_CONFIG.whatsappNumber}?text=Hi%20TapCraft%2C%20I%20would%20like%20to%20request%20a%20B2B%20quote%20for%20custom%20NFC%20metal%20cards.`,
+    email: APP_CONFIG.contactEmail,
+    wechatId: APP_CONFIG.wechatId,
+    phone: APP_CONFIG.phoneNumber,
   };
 
   const handleCopyWechat = () => {
@@ -96,7 +98,7 @@ export default function QuickContact() {
                     {copiedWechat ? (
                       <span className="text-amber-300 font-bold">{q.copied}</span>
                     ) : (
-                      q.wechatSub
+                      <span>{lang === 'zh' ? `复制微信/手机: ${contactData.wechatId}` : `WeChat: ${contactData.wechatId}`}</span>
                     )}
                   </div>
                 </div>
@@ -119,8 +121,8 @@ export default function QuickContact() {
                   <div className="text-xs font-bold text-white">
                     {q.emailBtn}
                   </div>
-                  <div className="text-[10px] text-slate-400 font-mono">
-                    {copiedEmail ? <span className="text-emerald-400 font-bold">Email Copied!</span> : q.emailSub}
+                  <div className="text-[10px] text-slate-400 font-mono truncate max-w-[170px]">
+                    {copiedEmail ? <span className="text-emerald-400 font-bold">Email Copied!</span> : contactData.email}
                   </div>
                 </div>
               </div>
