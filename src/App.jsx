@@ -3,6 +3,8 @@ import { LanguageProvider } from './i18n/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CardStudio from './components/CardStudio';
+import SampleKitSection from './components/SampleKitSection';
+import ClientGallery from './components/ClientGallery';
 import ProductCatalog from './components/ProductCatalog';
 import CostComparison from './components/CostComparison';
 import PricingCalculator from './components/PricingCalculator';
@@ -44,42 +46,50 @@ function MainApp() {
 
       {/* Main Content */}
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* 1. Hero Section with Real Macro & Lifestyle Tap Photography */}
         <Hero
           onOpenQuoteModal={handleOpenQuoteModal}
           onScrollToStudio={handleScrollToStudio}
         />
 
-        {/* Interactive 3D Card Studio */}
+        {/* 2. Interactive 3D Card Studio with live export */}
         <CardStudio
           onOpenQuoteModal={handleOpenQuoteModal}
         />
 
-        {/* Hardware Fleet Catalog */}
+        {/* 3. Physical Evaluation Sample Kit ($29) Showcase */}
+        <SampleKitSection
+          onOpenSampleModal={handleOpenSampleModal}
+        />
+
+        {/* 4. Real Client Deployments & Physical Card Gallery */}
+        <ClientGallery />
+
+        {/* 5. Hardware Fleet Matrix */}
         <ProductCatalog
           onOpenQuoteModal={handleOpenQuoteModal}
           onOpenSampleModal={handleOpenSampleModal}
         />
 
-        {/* Comparison: Why 0 Subscription */}
-        <CostComparison
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
-
-        {/* Wholesale Pricing Tier Calculator */}
+        {/* 6. Transparent Wholesale Pricing Tier Calculator */}
         <PricingCalculator
           onOpenQuoteModal={handleOpenQuoteModal}
         />
 
-        {/* How It Works (3 Steps) */}
+        {/* 7. Comparison: Why 0 Subscription */}
+        <CostComparison
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 8. How It Works (3 Steps) */}
         <HowItWorks
           onOpenQuoteModal={handleOpenQuoteModal}
         />
 
-        {/* Verified Enterprise Case Studies */}
+        {/* 9. Verified Enterprise Case Studies */}
         <Testimonials />
 
-        {/* Procurement FAQ */}
+        {/* 10. Procurement FAQ */}
         <FAQ
           onOpenSampleModal={handleOpenSampleModal}
         />

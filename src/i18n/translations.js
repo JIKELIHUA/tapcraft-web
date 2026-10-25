@@ -102,8 +102,8 @@ export const translations = {
       unitLabel: '/ unit',
       msrpLabel: 'MSRP',
       saveLabel: 'Save up to 75%',
-      btnCardQuote: 'Request 3D Proof & Quote',
-      btnKitOrder: 'Order Sample Kit ($29)',
+      btnCardQuote: 'Configure in 3D Studio',
+      btnKitOrder: 'View Sample Kit Details ($29)',
       items: [
         {
           id: 'obsidian-metal',
@@ -509,8 +509,8 @@ export const translations = {
       unitLabel: '/ 张',
       msrpLabel: '欧美零售价',
       saveLabel: '立省高达 75%',
-      btnCardQuote: '获取 3D 样机与批发报价',
-      btnKitOrder: '订购评测样卡 ($29)',
+      btnCardQuote: '在 3D 工作室配置此款',
+      btnKitOrder: '查看评测样盒实物 ($29)',
       items: [
         {
           id: 'obsidian-metal',

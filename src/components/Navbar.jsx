@@ -35,16 +35,19 @@ export default function Navbar({ onOpenQuoteModal, onOpenSampleModal }) {
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
+          <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
             <a href="#studio" className="hover:text-amber-300 transition-colors flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
               {t.nav.studio}
             </a>
+            <a href="#sample-kit" className="hover:text-amber-300 transition-colors">
+              {lang === 'zh' ? '实物样盒' : 'Sample Kit'}
+            </a>
+            <a href="#gallery" className="hover:text-amber-300 transition-colors">
+              {lang === 'zh' ? '实卡图库' : 'Client Gallery'}
+            </a>
             <a href="#hardware" className="hover:text-amber-300 transition-colors">
               {t.nav.hardware}
-            </a>
-            <a href="#comparison" className="hover:text-amber-300 transition-colors">
-              {t.nav.comparison}
             </a>
             <a href="#pricing" className="hover:text-amber-300 transition-colors">
               {t.nav.pricing}
@@ -66,19 +69,19 @@ export default function Navbar({ onOpenQuoteModal, onOpenSampleModal }) {
               <span>{t.nav.langToggle}</span>
             </button>
 
-            <button
-              onClick={() => onOpenSampleModal()}
+            <a
+              href="#sample-kit"
               className="px-3.5 py-2 text-xs font-semibold text-slate-300 hover:text-white border border-white/10 hover:border-amber-400/40 rounded-lg transition-all bg-white/[0.03] hover:bg-white/[0.08] cursor-pointer"
             >
               {t.nav.sampleKit}
-            </button>
-            <button
-              onClick={() => onOpenQuoteModal({})}
+            </a>
+            <a
+              href="#pricing"
               className="px-4 py-2 text-xs font-bold text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-lg shadow-lg shadow-amber-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-1.5 cursor-pointer"
             >
               <span>{t.nav.getQuote}</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
 
           {/* Mobile Quick Action & Menu Button */}
@@ -121,18 +124,25 @@ export default function Navbar({ onOpenQuoteModal, onOpenSampleModal }) {
                 <span className="text-xs bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded font-mono">3D</span>
               </a>
               <a
+                href="#sample-kit"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-2 hover:text-amber-300 border-b border-white/5"
+              >
+                {lang === 'zh' ? '实物评测样盒' : 'Sample Kit'}
+              </a>
+              <a
+                href="#gallery"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-2 hover:text-amber-300 border-b border-white/5"
+              >
+                {lang === 'zh' ? '实卡图库案例' : 'Client Gallery'}
+              </a>
+              <a
                 href="#hardware"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2 hover:text-amber-300 border-b border-white/5"
               >
                 {t.nav.hardware}
-              </a>
-              <a
-                href="#comparison"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2 hover:text-amber-300 border-b border-white/5"
-              >
-                {t.nav.comparison}
               </a>
               <a
                 href="#pricing"
@@ -151,24 +161,20 @@ export default function Navbar({ onOpenQuoteModal, onOpenSampleModal }) {
             </div>
             
             <div className="pt-2 flex flex-col gap-3">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenSampleModal();
-                }}
-                className="w-full py-3 text-sm font-semibold text-slate-200 border border-white/15 rounded-xl bg-white/5 text-center"
+              <a
+                href="#sample-kit"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3 text-sm font-semibold text-slate-200 border border-white/15 rounded-xl bg-white/5 text-center block"
               >
                 {t.nav.sampleKit}
-              </button>
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenQuoteModal({});
-                }}
-                className="w-full py-3 text-sm font-bold text-black bg-gradient-to-r from-amber-300 to-amber-500 rounded-xl shadow-lg shadow-amber-500/20 text-center"
+              </a>
+              <a
+                href="#pricing"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3 text-sm font-bold text-black bg-gradient-to-r from-amber-300 to-amber-500 rounded-xl shadow-lg shadow-amber-500/20 text-center block"
               >
                 {t.nav.getQuote}
-              </button>
+              </a>
             </div>
           </div>
         )}

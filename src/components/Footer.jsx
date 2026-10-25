@@ -118,19 +118,19 @@ export default function Footer({ onOpenQuoteModal, onOpenSampleModal }) {
 
       {/* Sticky Bottom Mobile Quick Action Bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0E1218]/95 backdrop-blur-xl border-t border-white/15 p-3 flex items-center justify-between gap-3 shadow-2xl">
-        <button
-          onClick={onOpenSampleModal}
-          className="flex-1 py-3 text-xs font-semibold text-slate-200 bg-white/5 border border-white/15 rounded-xl text-center cursor-pointer"
+        <a
+          href="#sample-kit"
+          className="flex-1 py-3 text-xs font-semibold text-slate-200 bg-white/5 border border-white/15 rounded-xl text-center cursor-pointer block"
         >
           {t.footer.mobileSample}
-        </button>
-        <button
-          onClick={() => onOpenQuoteModal({})}
+        </a>
+        <a
+          href="#pricing"
           className="flex-1 py-3 text-xs font-bold text-black bg-gradient-to-r from-amber-300 to-amber-500 rounded-xl shadow-lg shadow-amber-400/20 text-center cursor-pointer flex items-center justify-center gap-1.5 font-['Space_Grotesk']"
         >
           <span>{t.footer.mobileQuote}</span>
           <ArrowRight className="w-3.5 h-3.5" />
-        </button>
+        </a>
       </div>
     </>
   );

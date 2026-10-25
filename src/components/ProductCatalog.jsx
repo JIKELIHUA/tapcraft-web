@@ -91,7 +91,15 @@ export default function ProductCatalog({ onOpenQuoteModal, onOpenSampleModal }) 
 
                 <div className="pt-4 border-t border-white/10">
                   <button
-                    onClick={() => prod.id === 'sample-fleet-kit' ? onOpenSampleModal() : onOpenQuoteModal({ finish: prod.title })}
+                    onClick={() => {
+                      if (prod.id === 'sample-fleet-kit') {
+                        const el = document.getElementById('sample-kit');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        const el = document.getElementById('studio');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                     className="w-full py-3 text-xs font-bold text-slate-200 group-hover:text-black bg-white/5 group-hover:bg-amber-400 border border-white/10 group-hover:border-amber-400 rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer font-['Space_Grotesk']"
                   >
                     <span>{prod.id === 'sample-fleet-kit' ? t.catalog.btnKitOrder : t.catalog.btnCardQuote}</span>
