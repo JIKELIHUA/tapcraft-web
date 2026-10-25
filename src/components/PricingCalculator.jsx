@@ -9,17 +9,22 @@ export default function PricingCalculator({ onOpenQuoteModal }) {
   const [copiedQuote, setCopiedQuote] = useState(false);
 
   const getUnitPrice = (qty) => {
-    if (qty >= 500) return 9.50;
-    if (qty >= 250) return 11.00;
-    if (qty >= 100) return 13.50;
-    if (qty >= 50) return 15.50;
-    return 18.00;
+    if (qty === 1) return 49.00;
+    if (qty < 10) return 39.00;
+    if (qty < 30) return 22.00;
+    if (qty < 50) return 18.00;
+    if (qty < 100) return 15.50;
+    if (qty < 250) return 13.50;
+    if (qty < 500) return 11.00;
+    return 9.50;
   };
 
   const unitPrice = getUnitPrice(quantity);
   const totalCost = (quantity * unitPrice).toFixed(2);
   const paperCardsReplaced = (quantity * 500).toLocaleString();
-  const savings = Math.max(0, (quantity * 55 + quantity * 72 * 2) - (quantity * unitPrice)).toLocaleString();
+  const savings = quantity === 1
+    ? '1,200+'
+    : Math.max(0, (quantity * 55 + quantity * 72 * 2) - (quantity * unitPrice)).toLocaleString();
 
   const handleCopyBreakdown = () => {
     const text = lang === 'zh'
@@ -205,9 +210,9 @@ export default function PricingCalculator({ onOpenQuoteModal }) {
 
             <input
               type="range"
-              min={20}
-              max={1000}
-              step={10}
+              min={1}
+              max={500}
+              step={quantity > 50 ? 25 : (quantity > 10 ? 5 : 1)}
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
               className="w-full h-2.5 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-amber-400"
@@ -307,12 +312,21 @@ export default function PricingCalculator({ onOpenQuoteModal }) {
               </button>
             </div>
 
-            {/* Request 3D Proof Button */}
+            {/* Action CTA Button */}
             <button
-              onClick={() => onOpenQuoteModal({ quantity: quantity, finish: 'Obsidian Black' })}
+              onClick={() => onOpenQuoteModal({
+                mode: quantity === 1 ? 'single' : 'quote',
+                quantity: quantity,
+                finish: 'Obsidian Black',
+                price: unitPrice
+              })}
               className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-xl shadow-lg shadow-amber-400/20 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer font-['Space_Grotesk']"
             >
-              <span>{lang === 'zh' ? `索取 ${quantity} 张 3D 出样图 ➔` : `Request 3D Proof for ${quantity} Cards ➔`}</span>
+              <span>
+                {quantity === 1
+                  ? (lang === 'zh' ? '订购 1 张专属定制卡 ($49 包邮) ➔' : 'Order 1 Bespoke Card ($49 All-Inclusive) ➔')
+                  : (lang === 'zh' ? `索取 ${quantity} 张 3D 出样图 ➔` : `Request 3D Proof for ${quantity} Cards ➔`)}
+              </span>
             </button>
           </div>
 

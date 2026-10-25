@@ -68,12 +68,26 @@ export default function CardStudio({ onOpenQuoteModal }) {
 
   const [downloading, setDownloading] = useState(false);
 
-  const handleApplyToQuote = () => {
+  const handleOrderSingle = () => {
     onOpenQuoteModal({
+      mode: 'single',
       finish: activeFinish.name,
       company: companyName,
       contactPerson: cardholderName,
-      customUrl: destinationUrl
+      customUrl: destinationUrl,
+      quantity: 1,
+      price: 49
+    });
+  };
+
+  const handleTeamQuote = () => {
+    onOpenQuoteModal({
+      mode: 'quote',
+      finish: activeFinish.name,
+      company: companyName,
+      contactPerson: cardholderName,
+      customUrl: destinationUrl,
+      quantity: 50
     });
   };
 
@@ -496,14 +510,14 @@ export default function CardStudio({ onOpenQuoteModal }) {
               </div>
             </div>
 
-            {/* CTA: Apply to Quote & Download Proof */}
+            {/* CTA: Order 1 Card ($49), Team Quote (10+), Download Proof */}
             <div className="pt-2 space-y-2.5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <button
-                  onClick={handleApplyToQuote}
+                  onClick={handleOrderSingle}
                   className="w-full py-3.5 px-4 text-xs sm:text-sm font-bold text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 rounded-xl shadow-xl shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer font-['Space_Grotesk']"
                 >
-                  <span className="truncate">{t.studio.ctaSave}</span>
+                  <span className="truncate">{t.studio.ctaSave || 'Order 1 Custom Card ($49)'}</span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
 
@@ -516,6 +530,19 @@ export default function CardStudio({ onOpenQuoteModal }) {
                   <span className="truncate">{downloading ? t.studio.downloading : t.studio.ctaDownload}</span>
                 </button>
               </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <button
+                  onClick={handleTeamQuote}
+                  className="text-xs text-amber-400 hover:text-amber-300 underline underline-offset-4 cursor-pointer font-medium"
+                >
+                  {t.studio.ctaTeam || 'Need 10+ cards for your team? View volume pricing ➔'}
+                </button>
+                <span className="text-[11px] text-emerald-400 font-mono">
+                  {lang === 'zh' ? '顺丰/DHL 全球包邮' : 'Free Express Delivery'}
+                </span>
+              </div>
+
               <p className="text-[11px] text-slate-400 text-center">
                 {t.studio.turnaroundNotice}
               </p>

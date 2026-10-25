@@ -16,7 +16,8 @@ import {
   DollarSign,
   Layers,
   ShieldCheck,
-  Zap
+  Zap,
+  BookOpen
 } from 'lucide-react';
 import { APP_CONFIG } from '../config';
 
@@ -292,7 +293,19 @@ Email: ${APP_CONFIG.contactEmail}`;
             }`}
           >
             <Truck className="w-4 h-4" />
-            <span>4. 1688 源头找厂与国际盲发代发 SOP</span>
+            <span>4. 1688 找厂与货代盲发</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('handbook')}
+            className={`px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all cursor-pointer shrink-0 ${
+              activeTab === 'handbook'
+                ? 'border-amber-400 text-amber-300 bg-amber-400/10'
+                : 'border-transparent text-slate-400 hover:text-white'
+            }`}
+          >
+            <BookOpen className="w-4 h-4" />
+            <span>5. 跨境轻资产副业全景手册 (SOP)</span>
           </button>
         </div>
 
@@ -719,6 +732,176 @@ Email: ${APP_CONFIG.contactEmail}`;
                   <div>2. <strong>认准广东深圳 / 东莞 或 浙江温州苍南金乡</strong>：这两个地方占了全球 90% 的金属名片产能，欧美大牌 V1CE、Popl 的代工厂全在这里。</div>
                   <div>3. <strong>国际快递怎么发最便宜省心？</strong>：在淘宝或微信搜「深圳国际快递货代 DHL」，让 1688 厂家直接顺丰包邮寄到货代的深圳仓库。货代会帮你免费拍照验货、撕掉中文标签、换贴英文国际运单直发美国/欧洲，运费仅需 140 元左右！</div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* ==================== TAB 5: COMPREHENSIVE SIDE-HUSTLE SOP ==================== */}
+          {activeTab === 'handbook' && (
+            <div className="space-y-6">
+              <div className="bg-[#121622] p-5 sm:p-6 rounded-2xl border border-amber-400/30">
+                <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="p-2 rounded-xl bg-amber-400/10 text-amber-400">
+                      <BookOpen className="w-5 h-5" />
+                    </span>
+                    <div>
+                      <h3 className="text-base font-bold text-white font-['Space_Grotesk']">
+                        跨境轻资产副业实操全景手册 (SOP)
+                      </h3>
+                      <p className="text-xs text-slate-400">
+                        零设备投入 · 零库存积压 · 1张起步 · 专为个人/小本创业设计
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => copyText(`TapCraft 运营手册已保存至项目根目录 OPERATIONS_HANDBOOK.md`, 'handbook-msg')}
+                      className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>{copiedId === 'handbook-msg' ? '已提示！' : '根目录已存完整 MD 文档'}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* 1. Profit Model Table */}
+                <div className="space-y-4 mb-6">
+                  <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                    <DollarSign className="w-4 h-4" />
+                    <span>第 1 步：真实成本与每单净利润模型 (从 1 单开始滚雪球)</span>
+                  </h4>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs text-left text-slate-300 border-collapse">
+                      <thead>
+                        <tr className="border-b border-white/10 text-slate-400 font-mono">
+                          <th className="py-2 px-3">订单类型</th>
+                          <th className="py-2 px-3">老外售价</th>
+                          <th className="py-2 px-3">折合人民币</th>
+                          <th className="py-2 px-3">1688成本</th>
+                          <th className="py-2 px-3">国际小包</th>
+                          <th className="py-2 px-3 text-emerald-400 font-bold">单笔净利</th>
+                          <th className="py-2 px-3">毛利率</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5 font-mono">
+                        <tr className="bg-white/[0.02]">
+                          <td className="py-2.5 px-3 font-semibold text-white">单张个人专属款</td>
+                          <td className="py-2.5 px-3 text-amber-300 font-bold">$49.00</td>
+                          <td className="py-2.5 px-3">~¥355</td>
+                          <td className="py-2.5 px-3">¥28</td>
+                          <td className="py-2.5 px-3">¥48 (空运专线)</td>
+                          <td className="py-2.5 px-3 text-emerald-400 font-bold">¥275.00</td>
+                          <td className="py-2.5 px-3 text-emerald-400">77.5%</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2.5 px-3 font-semibold text-white">评测样包 (3金属+1立牌)</td>
+                          <td className="py-2.5 px-3 text-amber-300 font-bold">$29.00</td>
+                          <td className="py-2.5 px-3">~¥210</td>
+                          <td className="py-2.5 px-3">¥20</td>
+                          <td className="py-2.5 px-3">¥45 (云途小包)</td>
+                          <td className="py-2.5 px-3 text-emerald-400 font-bold">¥142.00</td>
+                          <td className="py-2.5 px-3 text-emerald-400">67.6%</td>
+                        </tr>
+                        <tr className="bg-white/[0.02]">
+                          <td className="py-2.5 px-3 font-semibold text-white">10人团队核心组</td>
+                          <td className="py-2.5 px-3 text-amber-300 font-bold">$220.00</td>
+                          <td className="py-2.5 px-3">~¥1,595</td>
+                          <td className="py-2.5 px-3">¥190</td>
+                          <td className="py-2.5 px-3">¥110 (DHL特快)</td>
+                          <td className="py-2.5 px-3 text-emerald-400 font-bold">¥1,280.00</td>
+                          <td className="py-2.5 px-3 text-emerald-400">80.2%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-[11px] text-slate-400">
+                    💡 <strong>资金铁律</strong>：客户在独立站或通过 PayPal/Invoice 预付 100% 美元后，你才向 1688 支付 ¥30~¥200 人民币货款，现金流永远为正，零资金占用风险。
+                  </p>
+                </div>
+
+                {/* 2. LinkedIn Step-by-Step */}
+                <div className="space-y-3 mb-6 p-4 rounded-xl bg-black/40 border border-white/5">
+                  <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                    <Globe className="w-4 h-4" />
+                    <span>第 2 步：LinkedIn 3D 专属链接破冰 SOP（每天仅需 20 分钟）</span>
+                  </h4>
+                  <div className="text-xs text-slate-300 space-y-2 leading-relaxed">
+                    <p>
+                      <strong>精准定位人群 (ICP)</strong>：欧美豪宅房产经纪 (Luxury Real Estate)、精品律所/VC合伙人、独立战略咨询顾问。这类人每天做大量社交、极度在意个人形象且 $49 美元完全可随手消费。
+                    </p>
+                    <p>
+                      <strong>执行流程</strong>：
+                      <br />1. 在 LinkedIn 搜索例如 <code className="text-amber-300">"Luxury Real Estate Agent" AND "Miami"</code>，找到经纪人姓名和机构。
+                      <br />2. 在本站顶部输入参数生成专属 3D 链接（例：<code className="text-amber-300">?company=Vance+Realty&name=Michael+Vance</code>）。
+                      <br />3. 录制 3 秒 3D 旋转动图，私信发送：“Hi [Name], loved your listings. We mocked up a 22g solid 304 steel NFC card for you with zero app fees. Flip your interactive 3D proof here: [Link].”
+                    </p>
+                    <p className="text-emerald-400 font-mono text-[11px]">
+                      🎯 优势：对方点开立刻看到刻着自己名字和公司 Logo 的 3D 金属卡，虚荣心与好奇心被瞬间击中，转化率较传统盲发冷邮件提升 5-10 倍！
+                    </p>
+                  </div>
+                </div>
+
+                {/* 3. 1688 Negotiation Hack */}
+                <div className="space-y-3 mb-6 p-4 rounded-xl bg-black/40 border border-white/5">
+                  <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                    <Zap className="w-4 h-4" />
+                    <span>第 3 步：如何免费让 1688 工厂美工排版（无需懂设计）</span>
+                  </h4>
+                  <div className="text-xs text-slate-300 space-y-2 leading-relaxed">
+                    <p>
+                      把老外的名字和矢量 Logo（AI/SVG/PNG）发给 1688 旺旺：
+                    </p>
+                    <div className="p-3 rounded-lg bg-[#0A0D12] text-amber-200 border border-white/10 font-mono text-[11px]">
+                      “老板你好，我们是专门做欧美企业外贸定制的。老外把矢量 Logo 发过来了，麻烦美工老师先按咱们厂标准排个 CDR 矢量预览图，我发给老外客户确认。老外付完款我立刻在你们这拍下打样，后续全团队大单都在你们这做。”
+                    </div>
+                    <p className="text-[11px] text-slate-400">
+                      工厂美工 3 分钟就能把正面排版图做好发你。拿到图后发给老外确认无误，再下单！
+                    </p>
+                  </div>
+                </div>
+
+                {/* 4. Dropshipping Freight */}
+                <div className="space-y-3 mb-6 p-4 rounded-xl bg-black/40 border border-white/5">
+                  <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                    <Truck className="w-4 h-4" />
+                    <span>第 4 步：深圳货代「无痕代发（Blind Dropshipping）」操作流程</span>
+                  </h4>
+                  <div className="text-xs text-slate-300 space-y-2 leading-relaxed">
+                    <p>
+                      <strong>什么是无痕代发？</strong> 老外收到的包裹只有你的品牌英文面单，绝不会有任何中文标签或 1688 痕迹。
+                    </p>
+                    <p>
+                      1. 1688 工厂做完后，装入黑色天地盖磁吸盒，寄到深圳跨境货代仓库（宝安/坂田）。
+                      <br />2. 货代仓库拆包验货无划痕后，贴上你导出的国际面单（寄件人显示 TapCraft，收件人是老外地址）。
+                      <br />3. 交付云途专线（YunExpress）或 DHL，约 5-8 工作日直达欧美客户家门口。
+                      <br />4. 拿到国际单号（如 YT260000000000），第一时间上传到 PayPal 填为已发货，彻底规避风控。
+                    </p>
+                  </div>
+                </div>
+
+                {/* 5. Daily Calendar */}
+                <div className="p-4 rounded-xl bg-black/40 border border-white/5">
+                  <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono mb-2">
+                    ⏱️ 每日 30 分钟副业行动日历
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300">
+                    <div className="p-3 rounded-lg bg-white/5 border border-white/5">
+                      <div className="text-amber-400 font-bold font-mono">晨间 20 分钟</div>
+                      <div className="text-[11px] text-slate-300 mt-1">LinkedIn 筛选 5 位目标，生成 5 个 3D 专属链接，私信发送。</div>
+                    </div>
+                    <div className="p-3 rounded-lg bg-white/5 border border-white/5">
+                      <div className="text-amber-400 font-bold font-mono">午休 10 分钟</div>
+                      <div className="text-[11px] text-slate-300 mt-1">查看邮箱收件箱，把客户回信 Logo 丢给 1688 美工免费排版。</div>
+                    </div>
+                    <div className="p-3 rounded-lg bg-white/5 border border-white/5">
+                      <div className="text-amber-400 font-bold font-mono">晚间 15 分钟</div>
+                      <div className="text-[11px] text-slate-300 mt-1">转发排版图，收美金后在 1688 拍下并寄到深圳货代仓库。</div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           )}
