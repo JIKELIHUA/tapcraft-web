@@ -46,9 +46,9 @@ export default function OpsWorkbench({ isOpen, onClose }) {
     setTimeout(() => setCopiedId(''), 2000);
   };
 
-  // Base URL for magic link
+  // Base URL for magic link (auto-sets lang=en for overseas prospects)
   const baseUrl = 'https://jikelihua.github.io/tapcraft-web/';
-  const magicLink = `${baseUrl}?company=${encodeURIComponent(targetCompany)}&name=${encodeURIComponent(targetName)}&role=${encodeURIComponent(targetRole)}&finish=${encodeURIComponent(targetFinish)}#studio`;
+  const magicLink = `${baseUrl}?lang=en&company=${encodeURIComponent(targetCompany)}&name=${encodeURIComponent(targetName)}&role=${encodeURIComponent(targetRole)}&finish=${encodeURIComponent(targetFinish)}#studio`;
 
   // Niche Cold Email Templates
   const nicheOutreachMap = {
