@@ -34,7 +34,7 @@ function MainApp() {
   }, []);
 
   const handleOpenQuoteModal = (data = {}) => {
-    setModalInitialData({ ...data, mode: 'quote' });
+    setModalInitialData({ mode: 'quote', ...data });
     setModalOpen(true);
   };
 

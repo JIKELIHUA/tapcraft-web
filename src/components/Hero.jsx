@@ -138,15 +138,26 @@ export default function Hero({ onOpenQuoteModal, onScrollToStudio }) {
 
             {/* Photo Container Frame */}
             <div className="relative w-full max-w-lg rounded-2xl overflow-hidden border border-white/15 bg-black shadow-2xl shadow-black/80 group">
-              <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-[#12161E] via-[#0A0D12] to-[#12161E]">
                 <img
                   src={activeView === 'macro' ? heroMacroImg : lifestyleTapImg}
                   alt={activeView === 'macro' ? 'TapCraft Obsidian Black Metal Card Macro' : 'TapCraft NFC Metal Card Tapped on iPhone'}
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700"
                 />
                 
                 {/* Subtle vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                {/* Animated NFC Tap Pulse Beacon */}
+                {activeView === 'tap' && (
+                  <div className="absolute top-[40%] left-[52%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                    <span className="absolute w-20 h-20 -top-10 -left-10 rounded-full bg-amber-400/25 animate-ping" />
+                    <span className="absolute w-32 h-32 -top-16 -left-16 rounded-full bg-amber-400/15 animate-pulse" />
+                    <span className="w-3.5 h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400 block" />
+                  </div>
+                )}
 
                 {/* Simulated iOS Card Notification Pop-up */}
                 {activeView === 'tap' && showIosPopup && (

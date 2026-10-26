@@ -200,6 +200,36 @@ export default function LeadModal({ isOpen, onClose, initialData = {} }) {
               <p className="text-xs text-slate-300 leading-relaxed">
                 {activeTab === 'single' ? t.modal.descSingle : (activeTab === 'sample' ? t.modal.descSample : t.modal.descQuote)}
               </p>
+
+              {/* What's Included Quick Pills for Single Card */}
+              {activeTab === 'single' && (
+                <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/5 text-[11px] text-slate-300 font-mono">
+                  <div className="flex items-center gap-1.5 text-emerald-400">
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                    <span className="text-slate-200">
+                      {lang === 'zh' ? '22g 304 实心医用级不锈钢' : '22g Solid 304 Surgical Steel'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-emerald-400">
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                    <span className="text-slate-200">
+                      {lang === 'zh' ? '光纤微雕姓名/Logo/职务' : 'Precision Laser Deep Etch'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-emerald-400">
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                    <span className="text-slate-200">
+                      {lang === 'zh' ? 'NTAG216 高频芯片写入' : 'NTAG216 NFC Pre-Programmed'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-emerald-400">
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                    <span className="text-slate-200">
+                      {lang === 'zh' ? '黑金磁吸盒 + 全球包邮直达' : 'Gift Box + Free Air Express'}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Form */}

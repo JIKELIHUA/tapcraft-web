@@ -246,42 +246,50 @@ export const translations = {
       ]
     },
     howItWorks: {
-      badge: 'FULFILLMENT',
-      title: 'From Upload to Delivery in 3 Steps.',
-      subtitle: 'From roster upload to international air delivery in 3 straightforward steps.',
-      guarantee: 'Quality Inspected',
-      bottomPrompt: 'Ready to see your logo on solid metal?',
-      bottomDesc: 'Submit your company name or vector logo. We will generate your 3D digital proof in under 4 hours.',
+      badge: 'FULFILLMENT & DELIVERIES',
+      title: 'From Design to Your Pocket in 3 Steps.',
+      subtitle: 'Whether you order 1 bespoke custom card ($49) or equip a 100-person firm, our process is effortless.',
+      guarantee: '100% Quality Inspected',
+      bottomPrompt: 'Ready to see your name & logo on 22g solid metal?',
+      bottomDesc: 'Submit your details or vector logo. Our engineering team prepares your photorealistic 3D proof in under 4 hours.',
       btnProof: 'Request Free 3D Proof',
       steps: [
         {
           step: '01',
-          time: '5 Minutes',
-          title: 'Submit Roster & Logo',
-          desc: 'Provide your company vector logo and an Excel roster with employee names, titles, and individual profile links.',
-          guarantee: 'Free Vector Cleanup & Formatting'
+          time: '2 Minutes',
+          title: 'Design or Share Details',
+          desc: 'Input your name and target URL (LinkedIn, portfolio, or website) in our 3D Studio, or submit a team roster.',
+          guarantee: 'Free Vector Logo Optimization'
         },
         {
           step: '02',
           time: 'Under 4 Hours',
           title: 'Review 3D Digital Proof',
-          desc: 'Our hardware team models photorealistic 3D proofs of your laser engraving for review before production.',
+          desc: 'Our engineering team models your photorealistic 3D proof. We only fire the laser after your 100% written approval.',
           guarantee: 'Unlimited Free Design Revisions'
         },
         {
           step: '03',
-          time: '3-5 Days Global Delivery',
-          title: 'Laser Etching & Air Express',
-          desc: 'Precision laser engraved in Shenzhen, NFC encoded, individually inspected, and dispatched via DHL/FedEx.',
+          time: '3-5 Days Priority Air',
+          title: 'Laser Engraved & Dispatched',
+          desc: 'Precision laser-etched on 304 steel in Shenzhen, NFC encoded, boxed in a luxury magnetic gift case, and express air-shipped with tracking.',
           guarantee: 'DDP Duty-Free Door Delivery'
         }
       ]
     },
     testimonials: {
       badge: 'CLIENT REVIEWS',
-      title: 'Trusted by Corporate Teams Worldwide.',
-      subtitle: 'Real-world feedback from global partners, law firms, and luxury brokerages.',
+      title: 'Trusted by Leaders & Corporate Teams.',
+      subtitle: 'Real-world feedback from solo advisors, venture partners, and luxury brokerages.',
       reviews: [
+        {
+          quote: "I bought just 1 bespoke card ($49) for networking at tech summits. People literally stop their conversation to inspect the 22g matte black steel card. Best $49 I've ever spent on my solo consulting business.",
+          author: "David K. Sterling",
+          role: "Solo Tech Advisor",
+          company: "Sterling Advisory Group",
+          location: "Austin, Texas",
+          product: "1x Bespoke Obsidian Matte Black Card ($49)"
+        },
         {
           quote: "We equipped our 45 residential agents with TapCraft Obsidian black cards. Clients are blown away at open houses, and saving $3,200 annually on SaaS subscription fees was a massive win for management.",
           author: "Marcus Vance",
@@ -665,42 +673,50 @@ export const translations = {
       ]
     },
     howItWorks: {
-      badge: '交付流程',
-      title: '从提交名单到收货仅需三步。',
-      subtitle: '从提交名单到顺丰/DHL 国际空运直达，全流程仅需三步。',
+      badge: '交付全流程',
+      title: '从设计到拿在手中仅需三步。',
+      subtitle: '无论订购 1 张个人专属独家款（$49 包邮），还是百人团队批量采购，全流程极简高效。',
       guarantee: '出厂 100% 测通质检',
-      bottomPrompt: '准备好将企业 Logo 激光深雕在实心金属上了吗？',
-      bottomDesc: '今天提供企业名称或矢量 Logo，我们的驻厂工程师将在 4 小时内为您出具专属 3D 渲染图。',
+      bottomPrompt: '准备好将个人姓名或企业 Logo 激光深雕在实心金属上了吗？',
+      bottomDesc: '今天提供姓名或企业矢量 Logo，我们的驻厂工程师将在 4 小时内为您出具专属 3D 照片级渲染图。',
       btnProof: '免费获取 3D 样机渲染图',
       steps: [
         {
           step: '01',
-          time: '5 分钟完成',
-          title: '提交名单与企业 Logo',
-          desc: '提供企业矢量 Logo 与包含员工姓名、职务及链接的 Excel 表格。',
+          time: '2 分钟完成',
+          title: '输入信息或提交名单',
+          desc: '在 3D 工作室输入要雕刻的姓名与碰一碰网址（LinkedIn、个人官网或名片主页），团队采购亦可直接提交名单表格。',
           guarantee: '免费协助矢量重绘与防糊优化'
         },
         {
           step: '02',
           time: '4 小时内出图',
           title: '确认 3D 渲染效果图',
-          desc: '工程师团队 4 小时内出具高精度 3D 效果图，排版确认无误后再排单生产。',
+          desc: '工程师团队 4 小时内出具高精度 3D 效果图，排版确认满意后再排单激光打标，绝无试错风险。',
           guarantee: '支持无限制修改调整至满意'
         },
         {
           step: '03',
           time: '3-5 天直达全国与全球',
-          title: '光纤激光雕刻与特快直发',
-          desc: '3个工作日内完成激光深雕与感应质检，经 DHL / 顺丰国际直飞全球并包清关。',
-          guarantee: '支持 DDP 包税到门'
+          title: '光纤激光深雕与特快发货',
+          desc: '在深圳精密工坊完成 304 不锈钢深雕打标与 NFC 写入，单张配磁吸黑金礼盒，顺丰/DHL 特快直飞送达。',
+          guarantee: '包税双清 · 全程门到门追踪'
         }
       ]
     },
     testimonials: {
       badge: '客户评价',
-      title: '深受全球涉外与商务团队信赖。',
-      subtitle: '来自涉外律所、豪宅经纪与高端商业团队的真实采购反馈。',
+      title: '深受个人专业精英与企业团队信赖。',
+      subtitle: '来自独立顾问、涉外律所、豪宅经纪与高端商业团队的真实采购反馈。',
       reviews: [
+        {
+          quote: "我只订了 1 张个人专属卡 ($49)，在海外科技峰会 Networking 换名片时，对方拿到手里都会停下对话赞叹这个 22克金属质感。这是我为独立咨询业务做过的最值的一笔投资。",
+          author: "David K. Sterling",
+          role: "独立技术战略顾问",
+          company: "Sterling Advisory Group",
+          location: "美国·奥斯汀",
+          product: "订购 1 张 曜石哑光黑个人独家款 ($49)"
+        },
         {
           quote: "我们为全团队 45 名豪宅经纪人换上了曜石黑名片。客户触碰手机时的惊叹感十足，更重要的是一年为公司直接省下了两万多软件订阅费。",
           author: "Marcus Vance",
